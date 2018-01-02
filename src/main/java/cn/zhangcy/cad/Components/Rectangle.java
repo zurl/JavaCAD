@@ -1,15 +1,12 @@
 package cn.zhangcy.cad.Components;
-import cn.zhangcy.cad.Core.ColorField;
-import cn.zhangcy.cad.Core.DoubleField;
-import cn.zhangcy.cad.Core.Field;
-import cn.zhangcy.cad.Core.ToolClass;
+
+import cn.zhangcy.cad.Core.*;
 import cn.zhangcy.cad.Core.Color;
+
 import java.awt.*;
 
-
-@ToolClass(Name = "圆形工具", InstanceName = "圆形", Icon = "circle.png")
-public class Circle
-        extends RectBoundElement {
+@ToolClass(Name = "矩形工具", InstanceName = "矩形", Icon = "square.png")
+public class Rectangle extends RectBoundElement {
 
     @DoubleField(Name = "线框粗细", Min = 1.0, Max = 10.0)
     public Field<Double> lineSize = new Field<>(1.0);
@@ -25,13 +22,13 @@ public class Circle
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
         g.setColor(fillColor.getValue());
-        g.fillOval((int)(lineSize.getValue() / 2),
+        g.fillRect((int)(lineSize.getValue() / 2),
                 (int)(lineSize.getValue() / 2),
                 (int)(width.getValue() - lineSize.getValue()),
                 (int)(height.getValue() - lineSize.getValue()));
         g2.setStroke(new BasicStroke((float)(double) lineSize.getValue()));
         g.setColor(lineColor.getValue());
-        g.drawOval(
+        g.drawRect(
                 (int)(lineSize.getValue() / 2),
                 (int)(lineSize.getValue() / 2),
                 (int)(width.getValue() - lineSize.getValue()),
@@ -40,12 +37,10 @@ public class Circle
 
     @Override
     public void hintOldTool(Tool tool) {
-        Circle circle = (Circle) tool;
+        Rectangle circle = (Rectangle) tool;
         lineColor.setValue(circle.lineColor.getValue());
         fillColor.setValue(circle.fillColor.getValue());
         lineSize.setValue(circle.lineSize.getValue());
 
     }
-
-
 }

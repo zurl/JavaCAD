@@ -1,12 +1,11 @@
 package cn.zhangcy.cad.UI;
 
-import cn.zhangcy.cad.Components.Arrow;
-import cn.zhangcy.cad.Components.Circle;
-import cn.zhangcy.cad.Components.Text;
-import cn.zhangcy.cad.Components.Transformer;
+import cn.zhangcy.cad.Components.*;
+import cn.zhangcy.cad.Components.Rectangle;
 import cn.zhangcy.cad.Context;
 import cn.zhangcy.cad.Core.Serializer;
 import cn.zhangcy.cad.Core.ToolClass;
+import cn.zhangcy.cad.Settings;
 import javafx.scene.image.ImageView;
 
 import javax.swing.*;
@@ -23,9 +22,11 @@ public class ToolBar extends JPanel{
 
     public static final Class[] tools = new Class[]{
             Arrow.class,
-            Circle.class,
             Transformer.class,
-            Text.class
+            Circle.class,
+            Text.class,
+            Line.class,
+            Rectangle.class
     };
 
     JButton createButton(String name, String icon){
@@ -48,6 +49,18 @@ public class ToolBar extends JPanel{
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
+                int option = JOptionPane.showConfirmDialog(null,
+                        "确认新建文件吗？您还有未保存的数据",
+                        "确认新建文件",
+                        JOptionPane.YES_NO_OPTION);
+
+                if (option == 0) {
+                    context.getCanvas().cleanUp();
+                    Context.getInstance().setTool(Settings.DEFAULT_TOOL);
+                    context.getCanvas().validate();
+                    context.getCanvas().repaint();
+                }
             }
         });
         add(button);
@@ -71,10 +84,13 @@ public class ToolBar extends JPanel{
                         }
                         context.getCanvas().cleanUp();
                         new Serializer().load(context.getCanvas(), stringBuilder.toString());
+                        Context.getInstance().setTool(Settings.DEFAULT_TOOL);
+                        context.getCanvas().validate();
+                        context.getCanvas().repaint();
                         reader.close();
-                    }
-                    JOptionPane.showMessageDialog(null, "打开成功");
-                }catch (Exception ee){
+                        JOptionPane.showMessageDialog(null, "打开成功");
+                        }
+                    }catch (Exception ee){
                     JOptionPane.showMessageDialog(null, "打开失败, 信息：" + ee.getMessage());
                 }
             }
@@ -91,9 +107,9 @@ public class ToolBar extends JPanel{
                         FileWriter fileWriter = new FileWriter(file);
                         fileWriter.write(new Serializer().save(context.getCanvas()));
                         fileWriter.close();
+                        JOptionPane.showMessageDialog(null, "保存成功");
                     }
-                    JOptionPane.showMessageDialog(null, "保存成功");
-                }catch (Exception ee){
+                     }catch (Exception ee){
                     JOptionPane.showMessageDialog(null, "保存失败, 信息：" + ee.getMessage());
                 }
             }

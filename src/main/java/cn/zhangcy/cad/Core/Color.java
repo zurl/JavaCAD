@@ -1,12 +1,17 @@
 package cn.zhangcy.cad.Core;
 
-public class Color extends java.awt.Color{
+public class Color extends java.awt.Color {
+
+    public Color(java.awt.Color color) {
+        super(color.getRed(), color.getGreen()
+                , color.getBlue(), color.getAlpha());
+    }
 
     public Color(int r, int g, int b, int a) {
         super(r, g, b, a);
     }
 
-    public static Color valueOf(String value){
+    public static Color valueOf(String value) {
         String[] rgba = value.split(",");
         return new Color(Integer.valueOf(rgba[0]),
                 Integer.valueOf(rgba[1]),

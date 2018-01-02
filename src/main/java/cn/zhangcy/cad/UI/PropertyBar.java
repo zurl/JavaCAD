@@ -4,6 +4,7 @@ import cn.zhangcy.cad.Components.Element;
 import cn.zhangcy.cad.Components.Tool;
 import cn.zhangcy.cad.Context;
 import cn.zhangcy.cad.Core.*;
+import cn.zhangcy.cad.Core.Color;
 
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
@@ -143,15 +144,21 @@ public class PropertyBar extends JPanel{
         colorPanel.setPreferredSize(new Dimension(20, 20));
         colorPanel.setMaximumSize(new Dimension(20, 20));
         colorPanel.setBackground(field.getValue());
+
+
+
         colorPanel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                field.setValue(JColorChooser.showDialog(
-                    Context.getInstance().getCanvas(),
-                    "Choose Background Color",
-                        colorPanel.getBackground()));
-                element.onRefresh();
-                super.mouseClicked(e);
+                java.awt.Color newColor = JColorChooser.showDialog(
+                        Context.getInstance().getCanvas(),
+                        "Choose Background Color",
+                        colorPanel.getBackground());
+                if(newColor != null){
+                    field.setValue(new Color(newColor));
+                    element.onRefresh();
+                    super.mouseClicked(e);
+                }
             }
         });
 
@@ -199,8 +206,7 @@ public class PropertyBar extends JPanel{
                 double val = (len * jSlider.getValue() / 100 + min);
                 jTextField.setText(new Formatter().format("%.2f", val).toString());
                 field.setValue(val);
-                element.validate();
-                element.repaint();
+                element.onRefresh();
             }
         });
 

@@ -17,12 +17,15 @@ abstract public class RectBoundElement
 
     DrawMouseAdapter drawMouseAdapter = new DrawMouseAdapter();
 
+    protected boolean onCreate = false;
+
     class DrawMouseAdapter extends MouseAdapter {
 
         int stX, stY;
 
         @Override
         public void mousePressed(MouseEvent e) {
+            onCreate = true;
             stX = e.getX();
             stY = e.getY();
             super.mousePressed(e);
@@ -30,6 +33,8 @@ abstract public class RectBoundElement
 
         @Override
         public void mouseReleased(MouseEvent e) {
+            onCreate = false;
+            repaint();
             Context.getInstance().createToolInstance();
             super.mouseReleased(e);
         }
@@ -76,7 +81,7 @@ abstract public class RectBoundElement
 
     @Override
     protected void paintBorder(Graphics g) {
-        if(isSelected) {
+        if(isSelected || onCreate) {
             Graphics2D g2 = (Graphics2D)g;
             Stroke stroke = g2.getStroke();
             float[] arr = {4.0f,2.0f};

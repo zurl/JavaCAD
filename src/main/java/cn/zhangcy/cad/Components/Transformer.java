@@ -30,6 +30,7 @@ public class Transformer extends Arrow{
                 selected.addMouseListener( elementMouseAdapter);
             }
             canvas.repaint();
+            Context.getInstance().getPropertyBar().setTool(null);
             super.mouseClicked(e);
         }
 
@@ -84,27 +85,28 @@ public class Transformer extends Arrow{
         }
     }
 
-    private JPanel anchorPanel;
-    private TransformerAnchor[] transformerAnchors;
+    private static JPanel anchorPanel;
+    private static TransformerAnchor[] transformerAnchors;
 
     public Transformer() {
         elementMouseAdapter = new ElementMouseAdapter();
         canvasMouseAdapter = new CanvasMouseAdapter();
-        transformerAnchors = new TransformerAnchor[8];
-        transformerAnchors[0] = new TransformerAnchor(this, -1, -1);
-        transformerAnchors[1] = new TransformerAnchor(this, -1, 1);
-        transformerAnchors[2] = new TransformerAnchor(this, 1, -1);
-        transformerAnchors[3] = new TransformerAnchor(this, 1, 1);
-        transformerAnchors[4] = new TransformerAnchor(this, 0, -1);
-        transformerAnchors[5] = new TransformerAnchor(this, 0, 1);
-        transformerAnchors[6] = new TransformerAnchor(this, -1, 0);
-        transformerAnchors[7] = new TransformerAnchor(this, 1, 0);
-
-        anchorPanel = new JPanel();
-        anchorPanel.setLayout(null);
-        anchorPanel.setBackground(Color.WHITE);
-        anchorPanel.setOpaque(false);
-        for(int i = 0; i < 8; i++) anchorPanel.add(transformerAnchors[i]);
+        if(anchorPanel == null) {
+            transformerAnchors = new TransformerAnchor[8];
+            transformerAnchors[0] = new TransformerAnchor(this, -1, -1);
+            transformerAnchors[1] = new TransformerAnchor(this, -1, 1);
+            transformerAnchors[2] = new TransformerAnchor(this, 1, -1);
+            transformerAnchors[3] = new TransformerAnchor(this, 1, 1);
+            transformerAnchors[4] = new TransformerAnchor(this, 0, -1);
+            transformerAnchors[5] = new TransformerAnchor(this, 0, 1);
+            transformerAnchors[6] = new TransformerAnchor(this, -1, 0);
+            transformerAnchors[7] = new TransformerAnchor(this, 1, 0);
+            anchorPanel = new JPanel();
+            anchorPanel.setLayout(null);
+            anchorPanel.setBackground(Color.WHITE);
+            anchorPanel.setOpaque(false);
+            for(int i = 0; i < 8; i++) anchorPanel.add(transformerAnchors[i]);
+        }
     }
 
     @Override
@@ -128,18 +130,21 @@ public class Transformer extends Arrow{
     @Override
     public void onDisable() {
         Canvas canvas = Context.getInstance().getCanvas();
+        canvas.remove(anchorPanel);
         if(selected != null){
-            canvas.remove(anchorPanel);
             selected.setSelected(false);
-            selected.addMouseListener( elementMouseAdapter );
         }
         canvas.removeMouseListener(canvasMouseAdapter);
         Component[] components = canvas.getComponents();
         for(Component component : components){
-            Element element = (Element) component;
-            if(element != null){
+            if( component instanceof Element) {
+                Element element = (Element) component;
                 element.setSelected(false);
                 element.removeMouseListener(elementMouseAdapter);
+            }
+            else{
+                canvas.remove(component);
+                canvas.repaint();
             }
         }
         canvas.repaint();

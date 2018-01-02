@@ -39,7 +39,7 @@ public class Context {
     }
 
     private Context() {
-        tool = Circle.class;
+        tool = Settings.DEFAULT_TOOL;
         canvas = new Canvas();
         propertyBar = new PropertyBar();
     }

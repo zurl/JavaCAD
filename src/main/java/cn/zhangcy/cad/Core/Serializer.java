@@ -70,6 +70,7 @@ public class Serializer {
         Component[] components = canvas.getComponents();
         for(Component component : components){
             if(component instanceof Element){
+                if( component == Context.getInstance().getCurrentTool()) continue;
                 stringBuilder.append(toString((Element) component));
                 stringBuilder.append("\n");
             }
@@ -88,8 +89,8 @@ public class Serializer {
         }
         for(int i = 1; i < tokens.length; i++){
             Element element = valueOf(tokens[i]);
-            if( element == Context.getInstance().getCurrentTool()) continue;
             canvas.add(element);
+            element.onRefresh();
         }
     }
 }

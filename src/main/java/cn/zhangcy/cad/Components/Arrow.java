@@ -94,15 +94,21 @@ public class Arrow implements Tool{
 
     @Override
     public void onDisable() {
+
+
         Canvas canvas = Context.getInstance().getCanvas();
         canvas.removeMouseListener(canvasMouseAdapter);
         Component[] components = canvas.getComponents();
         for(Component component : components){
-            Element element = (Element) component;
-            if(element != null){
+            if( component instanceof Element) {
+                Element element = (Element) component;
                 element.setSelected(false);
                 element.removeMouseListener(elementMouseAdapter);
                 element.removeMouseMotionListener(elementMouseAdapter);
+            }
+            else{
+                canvas.remove(component);
+                canvas.repaint();
             }
         }
     }

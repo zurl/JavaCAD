@@ -1,5 +1,7 @@
 package cn.zhangcy.cad.UI;
 
+import cn.zhangcy.cad.Components.Element;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -13,7 +15,9 @@ public class Canvas extends JPanel {
     public void cleanUp(){
         Component[] components = getComponents();
         for(Component component: components){
-            remove(component);
+            if( component instanceof Element) {
+                remove(component);
+            }
         }
     }
 
