@@ -1,10 +1,10 @@
-package cn.zhangcy.cad.Components;
+package cn.zhangcy.cad.Models;
 
 
 import cn.zhangcy.cad.Context;
 import cn.zhangcy.cad.Core.ToolClass;
-import cn.zhangcy.cad.UI.Canvas;
-import cn.zhangcy.cad.UI.TransformerAnchor;
+import cn.zhangcy.cad.Views.Canvas;
+import cn.zhangcy.cad.Views.TransformerAnchor;
 
 import javax.swing.*;
 import java.awt.*;

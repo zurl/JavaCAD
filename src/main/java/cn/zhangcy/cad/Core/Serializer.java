@@ -1,13 +1,10 @@
 package cn.zhangcy.cad.Core;
 
-import cn.zhangcy.cad.Components.Circle;
-import cn.zhangcy.cad.Components.Element;
-import cn.zhangcy.cad.Components.Text;
-import cn.zhangcy.cad.Components.Tool;
+import cn.zhangcy.cad.Models.Element;
 import cn.zhangcy.cad.Context;
 import cn.zhangcy.cad.Main;
 import cn.zhangcy.cad.Settings;
-import cn.zhangcy.cad.UI.Canvas;
+import cn.zhangcy.cad.Views.Canvas;
 
 import java.awt.*;
 import java.lang.reflect.Method;

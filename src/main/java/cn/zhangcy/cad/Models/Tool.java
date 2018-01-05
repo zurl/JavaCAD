@@ -1,6 +1,4 @@
-package cn.zhangcy.cad.Components;
-
-import java.awt.event.MouseAdapter;
+package cn.zhangcy.cad.Models;
 
 public interface Tool {
 

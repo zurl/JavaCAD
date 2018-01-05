@@ -1,7 +1,6 @@
 package cn.zhangcy.cad.Core;
 
-import cn.zhangcy.cad.Components.Element;
-import cn.zhangcy.cad.Components.Tool;
+import cn.zhangcy.cad.Models.Tool;
 
 public abstract class ButtonField{
     String name;

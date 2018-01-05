@@ -1,14 +1,9 @@
 package cn.zhangcy.cad;
 
-import cn.zhangcy.cad.Components.Arrow;
-import cn.zhangcy.cad.Components.Circle;
-import cn.zhangcy.cad.Components.Transformer;
-import cn.zhangcy.cad.UI.ToolBar;
+import cn.zhangcy.cad.Views.ToolBar;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class Main {
 

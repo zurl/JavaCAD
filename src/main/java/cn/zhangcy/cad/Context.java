@@ -1,9 +1,8 @@
 package cn.zhangcy.cad;
 
-import cn.zhangcy.cad.Components.Circle;
-import cn.zhangcy.cad.Components.Tool;
-import cn.zhangcy.cad.UI.Canvas;
-import cn.zhangcy.cad.UI.PropertyBar;
+import cn.zhangcy.cad.Models.Tool;
+import cn.zhangcy.cad.Views.Canvas;
+import cn.zhangcy.cad.Views.PropertyBar;
 
 public class Context {
 

@@ -1,14 +1,11 @@
-package cn.zhangcy.cad.Components;
+package cn.zhangcy.cad.Models;
 
 import cn.zhangcy.cad.Context;
 import cn.zhangcy.cad.Core.ButtonField;
-import cn.zhangcy.cad.Core.ColorField;
 import cn.zhangcy.cad.Core.Field;
 import cn.zhangcy.cad.Core.IntegerField;
-import cn.zhangcy.cad.Settings;
 
 import javax.swing.*;
-import java.awt.*;
 
 abstract public class Element
     extends JPanel implements Tool {

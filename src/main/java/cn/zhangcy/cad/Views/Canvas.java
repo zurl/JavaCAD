@@ -1,6 +1,6 @@
-package cn.zhangcy.cad.UI;
+package cn.zhangcy.cad.Views;
 
-import cn.zhangcy.cad.Components.Element;
+import cn.zhangcy.cad.Models.Element;
 
 import javax.swing.*;
 import java.awt.*;

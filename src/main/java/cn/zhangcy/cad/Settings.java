@@ -1,6 +1,6 @@
 package cn.zhangcy.cad;
 
-import cn.zhangcy.cad.Components.Arrow;
+import cn.zhangcy.cad.Models.Arrow;
 
 public class Settings {
 
